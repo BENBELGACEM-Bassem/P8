@@ -1,0 +1,6 @@
+
+
+
+
+class FavoriteManager():
+	pass
