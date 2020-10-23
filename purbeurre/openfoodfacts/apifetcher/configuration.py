@@ -18,12 +18,12 @@ class ApiOff:
         "Boissons à base de végétaux"
     ]
 
-    attributes = ["product_name", "nutrition_grades", "image_url", 
+    attributes = ["product_name", "nutrition_grades", "image_url",
                   "image_nutrition_url", "url", "code", "categories_hierarchy"]
     product_characteristics = [
         "code", "product_name", "nutrition_grades", "url", "image_url", "image_nutrition_url"]
 
-    category_size = 1000
+    category_size = 10
 
     @classmethod
     def product_choices_on(cls, wanted_category, page_number):

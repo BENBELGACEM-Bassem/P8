@@ -40,7 +40,7 @@ class ProductCleaner:
         """Get attribute values for each product from parsed data"""
         parsed_data = cls.clean_data()
         product_rows = []
-        categories = {}
+        product_categories_dict = {}
 
         for category in parsed_data:
             for product in parsed_data.get(category):
@@ -55,6 +55,6 @@ class ProductCleaner:
                 product_subcategories = product.get("categories_hierarchy")
                 product_categories = list(
                     set(product_subcategories + [category]))
-                categories[product_barcode] = product_categories
+                product_categories_dict[product_barcode] = product_categories
 
-        return product_rows, categories
+        return product_rows, product_categories_dict

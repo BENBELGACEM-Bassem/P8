@@ -23,6 +23,10 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
+    @classmethod
+    def field_names(cls):
+        return [f.name for f in cls._meta.get_fields()]
+
 
 class Product(models.Model):
     """Class representing products table fields"""
@@ -30,7 +34,10 @@ class Product(models.Model):
     class Meta:
         db_table = 'Product'
 
-    barcode = models.CharField(max_length=200, unique=True, help_text='Product barcode')
+    barcode = models.CharField(
+        max_length=200,
+        unique=True,
+        help_text='Product barcode')
     product_name = models.CharField(max_length=200, help_text='Product name')
     nutrition_grade = models.CharField(
         max_length=1, help_text='Nutritional score of the product')
@@ -41,13 +48,13 @@ class Product(models.Model):
         null=True,
         blank=True,
         help_text='hyperlink to Openfoodfacts nutrition data image')
-    category = models.ManyToManyField(Category, related_name='products')
+    category = models.ManyToManyField(Category, related_name='categories')
 
     objects = ProductManager()
 
     def __str__(self):
         return self.product_name
 
-    @property
-    def fields(cls):
-        return [f.name for f in cls._meta.fields]
+    @classmethod
+    def field_names(cls):
+        return [f.name for f in cls._meta.get_fields()]

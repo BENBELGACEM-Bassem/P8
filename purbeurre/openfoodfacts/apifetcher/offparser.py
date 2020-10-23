@@ -3,7 +3,7 @@
 
 import requests
 
-from configuration import ApiOff as api
+from .configuration import ApiOff as api
 
 
 class ProductFetcher:

@@ -4,7 +4,7 @@
 """Module creating favorite products data base table based on django ORM"""
 
 from django.db import models
-from ..products.models import Product
+from products.models import Product
 from django.conf import settings
 from .managers import FavoriteManager
 
@@ -13,6 +13,7 @@ class Favorite(models.Model):
 
     class Meta:
         db_table = 'Favorite'
+        unique_together = ['substituted', 'substitute']
 
     substituted = models.ForeignKey(
         Product,
@@ -27,11 +28,10 @@ class Favorite(models.Model):
 
     user = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
         related_name='favorites',
         help_text='User who saves a substitute product')
 
     objects = FavoriteManager()
 
     def __str__(self):
-        return self.name
+        return self.substitute
