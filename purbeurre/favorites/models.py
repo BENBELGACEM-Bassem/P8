@@ -18,12 +18,13 @@ class Favorite(models.Model):
     substituted = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
-        related_name='substitutes',
+        related_name='substituties',
         help_text='Product to be substituted')
 
     substitute = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
+        related_name='+',
         help_text='Substitute product')
 
     user = models.ManyToManyField(

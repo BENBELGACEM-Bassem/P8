@@ -14,7 +14,7 @@ class Category(models.Model):
         db_table = 'Category'
 
     category_name = models.CharField(
-        max_length=200,
+        max_length=255,
         unique=True,
         help_text='Category name')
 
@@ -22,10 +22,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category_name
-
-    @classmethod
-    def field_names(cls):
-        return [f.name for f in cls._meta.get_fields()]
 
 
 class Product(models.Model):
@@ -38,23 +34,22 @@ class Product(models.Model):
         max_length=200,
         unique=True,
         help_text='Product barcode')
-    product_name = models.CharField(max_length=200, help_text='Product name')
+    product_name = models.CharField(max_length=500, help_text='Product name')
     nutrition_grade = models.CharField(
         max_length=1, help_text='Nutritional score of the product')
-    url = models.URLField(help_text='hyperlink to Openfoodfacts product page')
+    url = models.URLField(
+        max_length=500,
+        help_text='hyperlink to Openfoodfacts product page')
     product_image = models.URLField(
-        help_text='hyperlink to Openfoodfacts product image')
+        max_length=500, help_text='hyperlink to Openfoodfacts product image')
     nutrition_image = models.URLField(
+        max_length=500,
         null=True,
         blank=True,
         help_text='hyperlink to Openfoodfacts nutrition data image')
-    category = models.ManyToManyField(Category, related_name='categories')
+    category = models.ManyToManyField(Category, related_name='products')
 
     objects = ProductManager()
 
     def __str__(self):
         return self.product_name
-
-    @classmethod
-    def field_names(cls):
-        return [f.name for f in cls._meta.get_fields()]

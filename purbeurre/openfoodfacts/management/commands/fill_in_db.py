@@ -1,7 +1,7 @@
 #! usr/bin/env python3
 # -*- Coding: UTF-8 -*-
 
-"""Module creating product and category data base tables,  based on django ORM"""
+"""Module creating product and category data base tables,based on django ORM"""
 
 from django.core.management.base import BaseCommand, CommandError
 from products.models import Product, Category
@@ -12,22 +12,25 @@ from openfoodfacts.apifetcher import dbbuilder
 class Command(BaseCommand):
     help = 'Fill in an existing data base with data from Open Food Facts Api'
 
-    # def add_arguments(self, parser):
-    #     parser.add_argument(
-    #         '--category_list',
-    #         type=list,
-    #         help='Catgory names to be used')
-    #     parser.add_argument(
-    #         '--category_size',
-    #         type=int,
-    #         help='Number of products per category')
+    def add_arguments(self, parser):
+        """Define arguments for the command to be run"""
+        parser.add_argument(
+            '--size',
+            type=int,
+            help='Number of products per category')
+        parser.add_argument(
+            '--categories',
+            nargs='*',
+            help='Catgory names to be used')
 
     def handle(self, *args, **options):
         try:
             Category.objects.all().delete()
             Product.objects.all().delete()
-            # api.category_list = options['category_list']
-            # api.category_size = options['category_size']
+            if options['categories']:
+                api.category_list = options['categories']
+            if options['size']:
+                api.category_size = options['size']
             dbbuilder.build()
             self.stdout.write(self.style.SUCCESS(
                 'Data base successfully populated'))

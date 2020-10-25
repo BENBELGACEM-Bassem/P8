@@ -23,7 +23,7 @@ class ApiOff:
     product_characteristics = [
         "code", "product_name", "nutrition_grades", "url", "image_url", "image_nutrition_url"]
 
-    category_size = 10
+    category_size = 160
 
     @classmethod
     def product_choices_on(cls, wanted_category, page_number):
@@ -33,7 +33,7 @@ class ApiOff:
             "tagtype_0": "categories",
             "tag_contains_0": "contains",
             "tag_0": wanted_category,
-            "page_size": 1000,
+            "page_size": 20,
             "page": page_number,
             "json": "true"}
         return product_choices

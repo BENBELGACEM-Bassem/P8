@@ -9,14 +9,20 @@ class ProductBuilder:
 
     def __init__(self):
         """Initialise product table instance"""
-        self.headers = Product.field_names()
+        self.headers = [
+            'barcode',
+            'product_name',
+            'nutrition_grade',
+            'url',
+            'product_image',
+            'nutrition_image']
 
     def insert_product_data(self, product_rows):
         """Insert product data into an already created product table"""
         for row in product_rows:
             data_product = dict(
                 zip(self.headers, row))
-            Product.objects.create(**data_product)
+            Product.objects.update_or_create(**data_product)
 
 
 class CategoryBuilder:
@@ -24,7 +30,7 @@ class CategoryBuilder:
 
     def __init__(self):
         """Initialise category table instance"""
-        self.headers = Category.field_names()
+        self.headers = 'category_name'
 
     def insert_category_data(self, product_categories_dict):
         """Insert category data into an already created category table"""
@@ -35,19 +41,26 @@ class CategoryBuilder:
             # Get the list of categories associated to this barcode
             categories_per_product_list = product_categories_dict[barcode]
             for category_name in categories_per_product_list:
-                # Create and add a category object to product in one step
-                data_category = dict(zip(self.headers, category_name))
-                product.categories.create(**data_category)
+                # Define new catgory field values
+                data_category = {self.headers: category_name}
+                # Create the new category object
+                Category.objects.update_or_create(**data_category)
+                # Get the new category object
+                new_cat = Category.objects.get(category_name=category_name)
+                # Associate the new category to the product
+                product.category.add(new_cat)
 
 
 def build():
     """Build the content of the data base"""
+    # Call needed inputs from cleaner module
     pc = pcl.extract_data()
     product_rows = pc[0]
     product_categories_dict = pc[1]
-
+    # Call building functions
     ProductBuilder().insert_product_data(product_rows)
     CategoryBuilder().insert_category_data(product_categories_dict)
+
 
 if __name__ == "__main__":
     build()
