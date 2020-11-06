@@ -4,6 +4,8 @@
 """Module creating product and category data base tables,  based on django ORM"""
 
 from django.db import models
+from django.forms import ModelForm, TextInput
+from django.utils.translation import gettext_lazy as _
 from .managers import ProductManager, CategoryManager
 
 
@@ -34,7 +36,7 @@ class Product(models.Model):
         max_length=200,
         unique=True,
         help_text='Product barcode')
-    product_name = models.CharField(max_length=500, help_text='Product name')
+    product_name = models.CharField(max_length=500)
     nutrition_grade = models.CharField(
         max_length=1, help_text='Nutritional score of the product')
     url = models.URLField(
@@ -53,3 +55,13 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+class ProductForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ('product_name',)
+        widgets = {'product_name': TextInput(attrs={
+            'class': 'form-control border border-warning',
+            'placeholder': 'Trouvez un aliment', })}
+
+        labels = {'product_name': _(''),}
