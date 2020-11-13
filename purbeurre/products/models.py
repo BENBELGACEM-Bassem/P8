@@ -6,7 +6,7 @@
 from django.db import models
 from django.forms import ModelForm, TextInput
 from django.utils.translation import gettext_lazy as _
-from .managers import ProductManager, CategoryManager
+from .managers import ProductManager
 
 
 class Category(models.Model):
@@ -20,7 +20,6 @@ class Category(models.Model):
         unique=True,
         help_text='Category name')
 
-    objects = CategoryManager()
 
     def __str__(self):
         return self.category_name

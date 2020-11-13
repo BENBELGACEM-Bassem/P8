@@ -1,5 +1,5 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
     <head>
@@ -7,9 +7,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>{% block title %}l{% endblock %}</title>
+        <title>{% block title %}{% endblock title %}</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{% static 'core/assets/img/favicon.png' %}" />  
+        <link rel="icon" type="image/x-icon" href="{% static 'dist/assets/img/favicon.png' %}" />  
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -18,83 +18,87 @@
         <!-- Third party plugin CSS-->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'core/css/styles.css' %}" rel="stylesheet" />
+        <link href="{% static 'dist/css/styles.css' %}" rel="stylesheet" />
+        <!-- Custom css style for P8 -->
+        <link href="{% static 'dist/css/custom.css' %}" rel="stylesheet" />
     </head>
 
 
     <body id="page-top">
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-            <div class="container">
-            	<img class="m-2" src="{% static 'core/assets/img/logo_pur_beurre_24x24.png' %}">
-            		<a class="navbar-brand js-scroll-trigger" href="{% url 'core:home' %}">Pur Beurre</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                    	<!-- Navbar search form -->
-                        <li class="nav-item">
-                        	<form id="navbar_search" class="form-inline" action="{% url 'core:home' %}" method="POST">
-                        		{% csrf_token %}
-                                {{form}}
-                                
-                        	</form>
-                        </li>
-                        <!-- Go to account -->
-                        <li class="nav-item">
-                        	{% if user.is_authenticated %}  
-                        	<a class="nav-link js-scroll-trigger" href="{% url 'users:account' %}" >
-                        		<i class="fas fa-2x fa-user "></i>
-                        	</a>
-                        	{% else %} 
-                        	<a class="nav-link js-scroll-trigger" href="{% url 'users:login' %}" >
-                        		<i class="fas fa-2x fa-sign-in-alt"></i>
-                        	</a>
-           					{% endif %} 
-                        </li>
-                        <!-- Go to saved products -->
-                        <li class="nav-item">
-                        	{% if user.is_authenticated %} 
-                        	<a class="nav-link js-scroll-trigger" href="{% url 'favorites:list' %}">
-                        		<i class="fas fa-2x fa-carrot"></i>
-                        	</a>
-                        	{% endif %} 
-                    	</li>
-                    	<!-- Disconnect -->
-                        <li class="nav-item">
-                        	{% if user.is_authenticated %}
-                        	<a class="nav-link js-scroll-trigger" href="{% url 'users:logout' %}">
-                        		<i class="fas fa-2x fa-sign-out-alt"></i>
-                        	</a>
-                        	{% else %}
-                        	<a class="nav-link js-scroll-trigger" href="{% url 'users:signup' %}">
-                        		<i class="fas fa-2x fa-user-plus"></i>
-                        	</a>
-                        	{% endif %} 
-                        </li>
+        {% block nav %}
+            <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+                <div class="container">
+                	<img class="m-2" src="{% static 'dist/assets/img/logo_pur_beurre.png' %}">
+                		<a class="navbar-brand js-scroll-trigger" href="{% url 'core:home' %}">Pur Beurre</a>
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                        	<!-- Navbar search form -->
+                            <li class="nav-item">
+                            	<form id="navbar_search" class="form-inline" action="{% url 'core:home' %}" method="POST">
+                            		{% csrf_token %}
+                                    {{form}}
+                                    
+                            	</form>
+                            </li>
+                            <!-- Go to account -->
+                            <li class="nav-item">
+                            	{% if user.is_authenticated %}  
+                            	<a class="nav-link js-scroll-trigger" href="{% url 'users:account' %}" >
+                            		<i class="fas fa-2x fa-user "></i>
+                            	</a>
+                            	{% else %} 
+                            	<a class="nav-link js-scroll-trigger" href="{% url 'users:login' %}" >
+                            		<i class="fas fa-2x fa-sign-in-alt"></i>
+                            	</a>
+               					{% endif %} 
+                            </li>
+                            <!-- Go to saved products -->
+                            <li class="nav-item">
+                            	{% if user.is_authenticated %} 
+                            	<a class="nav-link js-scroll-trigger" href="{% url 'favorites:list' %}">
+                            		<i class="fas fa-2x fa-carrot"></i>
+                            	</a>
+                            	{% endif %} 
+                        	</li>
+                        	<!-- Disconnect -->
+                            <li class="nav-item">
+                            	{% if user.is_authenticated %}
+                            	<a class="nav-link js-scroll-trigger" href="{% url 'users:logout' %}">
+                            		<i class="fas fa-2x fa-sign-out-alt"></i>
+                            	</a>
+                            	{% else %}
+                            	<a class="nav-link js-scroll-trigger" href="{% url 'users:signup' %}">
+                            		<i class="fas fa-2x fa-user-plus"></i>
+                            	</a>
+                            	{% endif %} 
+                            </li>
 
 
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-
+            </nav>
+        {% endblock nav%}
 
         <!-- Masthead-->
         {% block content %}
-        {% endblock %}
+        {% endblock content %}
 
         <!-- Footer-->
-        <footer class=" container-fluid text-center text-info bg-light fixed-bottom">
-        	<div class="row align-items-center text-center p-1">
-        		<h6 class="col-md-6" >
-        			<a href="{% url 'core:legal_notice' %}">Mentions légales</a>
-    			</h6>
-    			<h6 class="col-md-6">
-    				<a  href="{% url 'core:home' %}#contact">Contact</a>
-				</h6>
-            </div>
-        </footer>
-
+        {% block footer %}
+            <footer class=" container-fluid text-center text-info bg-light fixed-bottom">
+            	<div class="row align-items-center text-center p-1">
+            		<h6 class="col-md-6" >
+            			<a href="{% url 'core:legal_notice' %}">Mentions légales</a>
+        			</h6>
+        			<h6 class="col-md-6">
+        				<a  href="{% url 'core:home' %}#contact">Contact</a>
+    				</h6>
+                </div>
+            </footer>
+        {% endblock footer %}
 
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -103,6 +107,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
         <!-- Core theme JS-->
-        <script src="{% static 'core/js/scripts.js' %}"></script>
+        <script src="{% static 'dist/js/scripts.js' %}"></script>
     </body>
 </html>

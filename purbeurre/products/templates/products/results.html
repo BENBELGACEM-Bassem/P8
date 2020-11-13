@@ -2,18 +2,79 @@
 
 {% load static %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Résultats de recherche{% endblock %}
 
 {% block content %}
 
-<div class='row m-5 p-5'>
-	<div class="card col-md-4 align-items-center" style="width: 18rem;">
-	  <img src="..." class="card-img-top" alt="...">
-	  <div class="card-body">
-	    <h5 class="card-title">WORK ON PROGRESS</h5>
-	    <p class="card-text">Product name</p>
-	    <a href="#" class="btn btn-primary">Go somewhere</a>
-	  </div>
-	</div>
-</div>
+	{% if not product_to_substitute %}
+		<div class=" noresultview page-section text-center text-white ">
+			<h2 >Désolé, on ne connait pas ce produit !</h2>
+		</div>
+	{% else %}
+		<div class="page-section text-center" 
+		style="background:
+		linear-gradient(to bottom, rgba(222, 148, 64, 0.8) 0%, rgba(222, 148, 64, 0.8) 100%), 
+		url({{product_to_substitute.product_image}});">
+			<h2><span class=" tagline badge">{{product_to_substitute.product_name}}</span></h2>
+		</div>
+	{% endif %}
+
+
+	{% if not product_list %}
+		<h2 class="text-center page-section">Malheureusement, il n'y a pas de substituants à proposer.</h2>
+
+	{% else %}
+		<div class="container">
+
+			<div class="text-center text-black ">
+				<h2 class="page-section">Vous pouvez remplacer cet aliment par:</h2>
+			</div>
+
+			<div class="row align-items-center">
+			  	{% for product in product_list %}
+			    	<div class="col-md-4 ">
+				      	<img src={{product.product_image}} class="card-img-top border border-secondary rounded" style="width: 16rem; height: 16rem;">
+				      	<div class="card-body">
+				      		<a class="card-title" href="{% url 'products:details' pk=product.id %}">{{product.product_name}}
+				      		</a>
+				      		<p>
+				      		<input class="card-text text dark" type="submit" value="Sauvgarder">
+				        	</p>
+			    		</div>
+			    	</div>
+			  	{% endfor %}
+			</div>
+
+  			{% if is_paginated %}
+	  			<div class="row align-items-center justify-content-center">
+					<div class="col-12">
+						{% if page_obj.has_previous %}
+							<a class="btn btn-outline-info" href="?page=3">First</a>
+							<a class="btn btn-outline-info" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+						{% endif %}
+
+					  	{% for num in page_obj.paginator.page_range %}
+					        {% if page_obj.number == num %}
+				     			<a class="btn btn-info" href="?page={{ num }}">{{ num }}</a>      
+					        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}	        	
+				         		<a class="btn btn-outline-info" href="?page={{ num }}">{{ num }}</a>        		
+					        {% endif %}
+					  	{% endfor %}
+
+					    {% if page_obj.has_next %}	    	
+				    		<a class="btn btn-outline-info" href="?page={{ page_obj.next_page_number }}">Next</a>
+				        	<a class="btn btn-outline-info" href="?page={{ page_obj.paginator.num_pages }}">Last</a>  
+					    {% endif %}
+				    </div>
+		    	</div>
+			{% endif %} 
+
+		</div>
+
+	{% endif %}
+
+
+
+
+
 {% endblock %}

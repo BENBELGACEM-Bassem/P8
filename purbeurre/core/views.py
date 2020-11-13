@@ -8,11 +8,11 @@ from products.models import ProductForm
 class HomeView(FormView):
 	template_name = 'core/index.html'
 	form_class = ProductForm
-	success_url = reverse_lazy('products:results')
 
 	def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
+		# Retrieve form cleaned content and send it to the result view
+		product_name = form.cleaned_data.get('product_name')
+		self.success_url = reverse_lazy('products:results', kwargs={'product_name': product_name})
 		return super().form_valid(form)
 
 
@@ -20,4 +20,3 @@ class LegalNoticeView(TemplateView):
 	template_name = 'core/legal_notice.html'
 	def get(self, request):
 		return render(request, self.template_name)
-

@@ -132,3 +132,4 @@ STATIC_URL = '/static/'
 
 # Setting up a reference for a custom user model
 AUTH_USER_MODEL = 'users.User'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]

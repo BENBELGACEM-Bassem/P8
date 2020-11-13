@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Fiche produit{% endblock %}
+
+{% block content %}
+
+<div class="text-center text-black">
+	<h2 class="page-section">{{product.product_name}}</h2>
+</div>
+
+<div class="text-center text-black">
+	<a href={{product.url}}> Voir la fiche d'Open Food Facts</a>
+</div>
+
+<div class="text-center text-black">
+	<img src={{product.nutrition_image}}>
+</div>
+
+{% endblock %}
