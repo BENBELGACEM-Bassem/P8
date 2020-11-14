@@ -6,16 +6,34 @@
 
 {% block content %}
 
-<div class="text-center text-black">
-	<h2 class="page-section">{{product.product_name}}</h2>
+<!-- Produit de substitution-entête -->
+<div class="page-section text-center" 
+style="background:
+linear-gradient(to bottom, rgba(222, 148, 64, 0.8) 0%, rgba(222, 148, 64, 0.8) 100%), 
+url({{product.product_image}});">
+	<h2><span class=" tagline badge">{{product.product_name}}</span></h2>
 </div>
 
-<div class="text-center text-black">
-	<a href={{product.url}}> Voir la fiche d'Open Food Facts</a>
-</div>
+<!-- Informations sur le produit -->
 
-<div class="text-center text-black">
-	<img src={{product.nutrition_image}}>
-</div>
+	<div class="container-fluid">
+
+		<div class="row align-items-center justify-content-around text-center ">
+
+			<h1 class="col-md-6 m-3 text-uppercase">
+				<img src="https://static.openfoodfacts.org/images/misc/nutriscore-{{product.nutrition_grade}}.png">
+			</h1>
+			
+			<img class=" col-md-3 mt-3 mb-1" src={{product.nutrition_image}}>
+
+		</div>
+
+	</div>
+
+	<div class="row mb-5 mt-4 py-5 justify-content-center justify-content-around">
+		<h3>
+			<a class=" link col-md-6 text-secondary text-center " href={{product.url}}> Voir la fiche d'Open Food Facts</a>
+		</h3>
+	</div>
 
 {% endblock %}

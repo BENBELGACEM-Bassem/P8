@@ -6,6 +6,8 @@
 
 {% block content %}
 
+<!-- Aliment cherché -->
+
 	{% if not product_to_substitute %}
 		<div class=" noresultview page-section text-center text-white ">
 			<h2 >Désolé, on ne connait pas ce produit !</h2>
@@ -19,51 +21,66 @@
 		</div>
 	{% endif %}
 
+<!-- Liste des choix de substitution -->
 
 	{% if not product_list %}
 		<h2 class="text-center page-section">Malheureusement, il n'y a pas de substituants à proposer.</h2>
 
 	{% else %}
-		<div class="container">
+		<div class="container-fluid">
 
-			<div class="text-center text-black ">
-				<h2 class="page-section">Vous pouvez remplacer cet aliment par:</h2>
+			<div class="m-3 text-center">
+				<h2 >Vous pouvez remplacer cet aliment par:</h2>
 			</div>
 
-			<div class="row align-items-center">
+			<div class="row justify-content-around " >
 			  	{% for product in product_list %}
-			    	<div class="col-md-4 ">
-				      	<img src={{product.product_image}} class="card-img-top border border-secondary rounded" style="width: 16rem; height: 16rem;">
-				      	<div class="card-body">
-				      		<a class="card-title" href="{% url 'products:details' pk=product.id %}">{{product.product_name}}
-				      		</a>
-				      		<p>
-				      		<input class="card-text text dark" type="submit" value="Sauvgarder">
-				        	</p>
-			    		</div>
-			    	</div>
-			  	{% endfor %}
-			</div>
 
+			    	<div class="col-md-3 align-items-center m-3 border rounded text-center" >
+
+			    		<p class="dot border border-warning text-uppercase font-weight-bold"> {{product.nutrition_grade}} </p>
+
+				      	<img class=" picture m-1 " src={{product.product_image}} >
+				      		
+				      		<div class="m-1">
+		      					<a  href="{% url 'products:details' pk=product.id %}">{{product.product_name}}</a>
+	      					</div>
+
+	      					{% if user.is_authenticated %}
+		      					<div class="mb-1">
+			      					<input  type="submit" value="Sauvgarder">
+			      				</div>
+		      				{% endif %}
+
+			    	</div>
+
+			  	{% endfor %}
+
+			</div>
+		</div>
+
+<!-- Pagination -->
+
+		<div class=" page container">
   			{% if is_paginated %}
-	  			<div class="row align-items-center justify-content-center">
-					<div class="col-12">
+	  			<div class="row mb-5 mt-4 py-5 justify-content-center align-items-center" >
+					<div class="col-12 " >
 						{% if page_obj.has_previous %}
-							<a class="btn btn-outline-info" href="?page=3">First</a>
-							<a class="btn btn-outline-info" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+							<a class="btn-sm btn-outline-info" href="?page=1">First</a>
+							<a class="btn-sm btn-outline-info" href="?page={{ page_obj.previous_page_number }}">Previous</a>
 						{% endif %}
 
 					  	{% for num in page_obj.paginator.page_range %}
 					        {% if page_obj.number == num %}
-				     			<a class="btn btn-info" href="?page={{ num }}">{{ num }}</a>      
+				     			<a class="btn-sm btn-info" href="?page={{ num }}">{{num}}</a>      
 					        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}	        	
-				         		<a class="btn btn-outline-info" href="?page={{ num }}">{{ num }}</a>        		
+				         		<a class="btn-sm btn-outline-info" href="?page={{num}}">{{ num }}</a>        		
 					        {% endif %}
 					  	{% endfor %}
 
 					    {% if page_obj.has_next %}	    	
-				    		<a class="btn btn-outline-info" href="?page={{ page_obj.next_page_number }}">Next</a>
-				        	<a class="btn btn-outline-info" href="?page={{ page_obj.paginator.num_pages }}">Last</a>  
+				    		<a class="btn-sm btn-outline-info" href="?page={{ page_obj.next_page_number }}">Next</a>
+				        	<a class="btn-sm btn-outline-info" href="?page={{ page_obj.paginator.num_pages }}">Last</a>  
 					    {% endif %}
 				    </div>
 		    	</div>
@@ -72,9 +89,5 @@
 		</div>
 
 	{% endif %}
-
-
-
-
 
 {% endblock %}
