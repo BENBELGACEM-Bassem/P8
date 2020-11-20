@@ -1,3 +1,6 @@
+#! usr/bin/env python3
+# -*- Coding: UTF-8 -*-
+
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView

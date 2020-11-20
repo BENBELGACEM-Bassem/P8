@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Mon_Compte{% endblock %}
+
+{% block content %}
+
+<!-- hoy -->
+<div class= "accounttview container-fluid page-section">
+	<div class="row align-items-center justify-content-center text-center text-white ">
+		<div class="col-md-6 my-3">
+			<h2>Ahoy</h2>
+		</div>
+		<div class="col-md-6 my-2">
+			<h3>{{ user.first_name }}</h3>
+		</div>
+	</div>
+</div>
+
+<!-- email -->
+<div class="container-fluid">
+
+	<div class="row align-items-center justify-content-center text-center ">
+
+		 <div class="col-md-6 mt-4">
+
+           <h3 class="">{{ user.email }}</h3>
+           
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+
+
+
+

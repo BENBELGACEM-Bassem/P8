@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Connexion{% endblock %}
+
+{% block content %}
+
+	<div class= "noresultview p-4 text-center">
+		<h2><span class=" tagline badge">Entrer vos identifiants !</span></h2>
+	</div>
+
+	<div class="container">
+
+        <!-- Display a message in case of successfull registration -->
+        {% if messages %}
+            {% for message in messages %}
+                <div id="alert_message" class="row align-items-center justify-content-center ">
+                    <div class="col-5 mb-5 text-center text-primary bg-success" >
+                        {{message}}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Login form -->
+		<div class="row input-group  align-items-center justify-content-center text-center ">
+
+			<form class="col-md-4 col-sm-6 mt-3" action="{% url 'users:login' %}" method="post">
+		        {% csrf_token %}
+		        <fieldset class="form-group">
+		            {{login_form|crispy}}
+	               	<input class="btn btn-outline-info" type="submit" id="button-addon2" value="Se connecter">
+		        </fieldset>
+
+    			<div class=" border-top mb-6 mt-2">
+		            <small class="text-muted">
+		                Besoin d'un compte? <a class="ml-2" href="{% url 'users:signup' %}">Créer votre compte</a>
+		            </small>
+	        	</div>
+		    </form>
+
+		</div>
+
+	</div>
+
+
+{% endblock %}

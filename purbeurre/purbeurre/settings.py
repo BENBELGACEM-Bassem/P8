@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'openfoodfacts.apps.OpenfoodfactsConfig',
     'favorites.apps.FavoritesConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -132,4 +133,9 @@ STATIC_URL = '/static/'
 
 # Setting up a reference for a custom user model
 AUTH_USER_MODEL = 'users.User'
+
+# Setting the path for static files
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# Maching crispy to bootstrap4
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
