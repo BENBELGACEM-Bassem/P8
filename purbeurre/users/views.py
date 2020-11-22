@@ -29,12 +29,11 @@ class SignUpView(SuccessMessageMixin, FormView):
 
 
 class ConnectView(SuccessMessageMixin, LoginView):
-
 	template_name = 'users/login.html'
 	success_url = reverse_lazy('core:home')
 
 	def form_valid(self, form):
-		self.success_message = "Vous êtes bien connectés à votre compte PurBeurre !"
+		self.success_message = "Vous êtes désoramais connectés."
 		return super().form_valid(form)
 
 	def get_context_data(self, **kwargs):
@@ -44,11 +43,9 @@ class ConnectView(SuccessMessageMixin, LoginView):
 	    context['login_form'] = context.pop('form')
 	    return context
 
-class QuitView(SuccessMessageMixin, LogoutView):
 
-	template_name = 'core/index.html'
-	success_url = reverse_lazy('core:home')
-	success_message = "Vous êtes bien deconnectés ! A bientôt."
+class QuitView(SuccessMessageMixin, LogoutView):
+	next_page = reverse_lazy('core:home')
 
 class AccountView(TemplateView):
 	template_name = 'users/account.html'

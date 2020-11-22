@@ -1,7 +1,6 @@
 #! usr/bin/env python3
 # -*- Coding: UTF-8 -*-
 
-from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Product
@@ -11,13 +10,12 @@ class ResultView(ListView):
 	template_name = 'products/results.html'
 	context_object_name = 'product_list'
 	
-
 	def get_queryset(self):
 		# Retrieve product to be substituted
 		try:
 			self.product = Product.objects.filter(product_name__icontains=self.kwargs['product_name'])[0]
 			candidates = Product.objects.get_substitute_candidates(self.product)
-			if candidates:
+			if candidates.exists():
 				self.paginate_by = 6
 				return candidates
 		except:
