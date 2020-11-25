@@ -9,7 +9,7 @@ from .models import Product
 class ResultView(ListView):
 	template_name = 'products/results.html'
 	context_object_name = 'product_list'
-	
+
 	def get_queryset(self):
 		# Retrieve product to be substituted
 		try:
@@ -21,12 +21,13 @@ class ResultView(ListView):
 		except:
 			return None
 
+
 	def get_context_data(self, **kwargs):
 		try:
 		    # Call the base implementation first to get a context
 		    context = super().get_context_data(**kwargs)
 		    # Add in the product to be substituted to the context
-		    context['product_to_substitute'] = self.product
+		    context['substituted'] = self.product
 		    return context
 		except:
 			return None

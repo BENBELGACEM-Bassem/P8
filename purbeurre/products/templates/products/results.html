@@ -8,7 +8,7 @@
 
 <!-- Aliment cherché -->
 
-	{% if not product_to_substitute %}
+	{% if not substituted %}
 		<div class=" noresultview page-section text-center text-white ">
 			<h2 >Désolé, on ne connait pas ce produit !</h2>
 		</div>
@@ -16,15 +16,15 @@
 		<div class="page-section text-center" 
 		style="background:
 		linear-gradient(to bottom, rgba(222, 148, 64, 0.8) 0%, rgba(222, 148, 64, 0.8) 100%), 
-		url({{product_to_substitute.product_image}});">
-			<h2><span class=" tagline badge">{{product_to_substitute.product_name}}</span></h2>
+		url({{substituted.product_image}});">
+			<h2><span class=" tagline badge">{{substituted.product_name}}</span></h2>
 		</div>
 	{% endif %}
 
 <!-- Liste des choix de substitution -->
 
 	{% if not product_list %}
-		<h2 class="text-center page-section">Malheureusement, il n'y a pas de substituants à proposer.</h2>
+		<h3 class="text-center page-section">Malheureusement, il n'y a pas de substituants à proposer.</h3>
 
 	{% else %}
 		<div class="container-fluid">
@@ -40,17 +40,27 @@
 
 			    		<p class="dot border border-warning text-uppercase font-weight-bold"> {{product.nutrition_grade}} </p>
 
-				      	<img class=" picture m-1 " src={{product.product_image}} >
+				      	<img class="picture m-3" src={{product.product_image}} >
 				      		
-				      		<div class="m-1">
-		      					<a  href="{% url 'products:details' pk=product.id %}">{{product.product_name}}</a>
+				      		<div >
+		      					<a  class="m-1 text-warning" href="{% url 'products:details' pk=product.id %}">{{product.product_name}}</a>
 	      					</div>
 
+	      					<!-- saving favorites -->
 	      					{% if user.is_authenticated %}
-		      					<div class="mb-1">
-			      					<input  type="submit" value="Sauvgarder">
-			      				</div>
-		      				{% endif %}
+								<form class="save" action="{% url 'favorites:save' substituted.product_name page_obj.number %}" method="POST">
+									{% csrf_token %}
+                            		<input type="hidden" name="substitute" value="{{product.id}}"/>
+                            		<input type="hidden" name="substituted" value="{{substituted.id}}"/>
+                            		<input type="hidden" name="user" value="{{user.id}}"/>
+									{% if product.is_favorite %}
+	                                	<input class="mb-1" type="submit" class="btn btn-outline-success mb-1" disabled=True value="Sauvegardé" />
+	                                {% else %}
+	                                	<button type="submit" class="btn btn-outline-warning mb-1"><i class="fas fa-save mr-1"></i>Sauvegarder</button>
+	                                {% endif %}
+								</form>
+
+	      					{% endif %}
 
 			    	</div>
 

@@ -7,20 +7,19 @@
 {% block content %}
 
 
-	<div class= "faveview container-fluid page-section">
-		<div class="row align-items-center justify-content-center text-center text-white ">
-			<div class="col-md-7 my-3">
-				<h2>Ahoy</h2>
-			</div>
-			<div class="col-md-7 ">
-				<h3>{{ user.first_name }}</h3>
-			</div>
+<!-- Head -->
+<div class="noresultview container-fluid page-section ">
+	<div class="row align-items-center justify-content-center text-center">
+		<div class="col-md-7 my-3">
+			<h2><span class=" tagline badge">Mes favoris</span></h2>
 		</div>
 	</div>
+</div>
 
 
-{% if not product_list %}
-		<h2 class="text-center page-section">Malheureusement, il n'y a pas de substituants à proposer.</h2>
+<!-- Products display -->
+	{% if not favorites_list %}
+			<h3 class="text-center page-section">Votre liste de substituants est vide!</h3>
 
 	{% else %}
 		<div class="container-fluid">
@@ -30,23 +29,23 @@
 			</div>
 
 			<div class="row justify-content-around " >
-			  	{% for product in product_list %}
+			  	{% for product in favorites_list %}
 
 			    	<div class="col-md-3 align-items-center m-3 border rounded text-center" >
 
 			    		<p class="dot border border-warning text-uppercase font-weight-bold"> {{product.nutrition_grade}} </p>
 
-				      	<img class=" picture m-1 " src={{product.product_image}} >
+				      	<img class="picture m-1" src={{product.product_image}} >
 				      		
 				      		<div class="m-1">
 		      					<a  href="{% url 'products:details' pk=product.id %}">{{product.product_name}}</a>
 	      					</div>
 
-	      					{% if user.is_authenticated %}
-		      					<div class="mb-1">
-			      					<input  type="submit" value="Sauvgarder">
-			      				</div>
-		      				{% endif %}
+	      					<!-- Delete job -->
+	      					<div class="mb-1">
+		      					<input  type="submit" value="Sauvgarder">
+		      				</div>
+		      				
 
 			    	</div>
 
