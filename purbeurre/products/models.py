@@ -55,6 +55,7 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
 
+
 class ProductForm(ModelForm):
     class Meta:
         model = Product

@@ -6,7 +6,7 @@
 from django.db import models
 from products.models import Product
 from django.conf import settings
-from .managers import FavoriteManager
+
 
 class Favorite(models.Model):
     """Class representing favorite prodcuts table fields"""
@@ -17,22 +17,13 @@ class Favorite(models.Model):
 
     substituted = models.ForeignKey(
         Product,
-        on_delete=models.CASCADE,
-        related_name='substituties',
-        help_text='Product to be substituted')
+        on_delete=models.CASCADE)
 
     substitute = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
-        related_name='+',
-        help_text='Substitute product')
+        related_name='+')
 
     user = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        related_name='favorites',
-        help_text='User who saves a substitute product')
-
-    objects = FavoriteManager()
-
-    def __str__(self):
-        return self.substitute
+        related_name='favorites')

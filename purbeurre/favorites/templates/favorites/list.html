@@ -22,35 +22,32 @@
 			<h3 class="text-center page-section">Votre liste de substituants est vide!</h3>
 
 	{% else %}
-		<div class="container-fluid">
-
-			<div class="m-3 text-center">
-				<h2 >Vous pouvez remplacer cet aliment par:</h2>
-			</div>
+		<div class="container-fluid mt-3 mb-5 pb-3">
 
 			<div class="row justify-content-around " >
+
 			  	{% for product in favorites_list %}
 
 			    	<div class="col-md-3 align-items-center m-3 border rounded text-center" >
 
-			    		<p class="dot border border-warning text-uppercase font-weight-bold"> {{product.nutrition_grade}} </p>
+			    		<p class="dot border border-warning text-uppercase font-weight-bold"> {{product.substitute.nutrition_grade}} </p>
 
-				      	<img class="picture m-1" src={{product.product_image}} >
+				      	<img class="picture m-1" src={{product.substitute.product_image}} >
 				      		
 				      		<div class="m-1">
-		      					<a  href="{% url 'products:details' pk=product.id %}">{{product.product_name}}</a>
+		      					<a  href="{% url 'products:details' pk=product.id %}">{{product.substitute.product_name}}</a>
 	      					</div>
 
 	      					<!-- Delete job -->
-	      					<div class="mb-1">
-		      					<input  type="submit" value="Sauvgarder">
-		      				</div>
-		      				
+							<form class="save" action="{% url 'favorites:delete' product.id page_obj.number favorites_list|length %}" method="POST">
+								{% csrf_token %}
+								<input type="hidden" name="product" value="{{product.id}}"/>
+                            	<button type="submit" class="btn btn-primary mb-1">Supprimer</button>
 
+							</form>
 			    	</div>
 
 			  	{% endfor %}
-
 			</div>
 		</div>
 
@@ -67,7 +64,7 @@
 
 					  	{% for num in page_obj.paginator.page_range %}
 					        {% if page_obj.number == num %}
-				     			<a class="btn-sm btn-info" href="?page={{ num }}">{{num}}</a>      
+				     			<a class="btn-sm btn-info" href="?page={{num}}">{{num}}</a>      
 					        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}	        	
 				         		<a class="btn-sm btn-outline-info" href="?page={{num}}">{{ num }}</a>        		
 					        {% endif %}

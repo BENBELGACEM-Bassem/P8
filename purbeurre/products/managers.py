@@ -21,7 +21,7 @@ class ProductManager(models.Manager):
 			grade = candidate.nutrition_grade
 			candidate_description = (candidate, similarity, grade)
 			similar_products.append(candidate_description)
-		# Sort similar_products from most to less similar 
+		# Sort similar_products from most to less similar
 		sorted_by_similarity = sorted(similar_products, key=lambda tup: tup[1], reverse=True)
 		# Leave only equal or better grade among similar_products 
 		healthier_candidate_objects = [similar_product[0] for similar_product in sorted_by_similarity if similar_product[2] < product.nutrition_grade]
@@ -30,3 +30,4 @@ class ProductManager(models.Manager):
 		healthier_candidate_queryset = self.model.objects.filter(id__in=healthier_candidate_object_ids)
 		# Return a queryset
 		return healthier_candidate_queryset
+
