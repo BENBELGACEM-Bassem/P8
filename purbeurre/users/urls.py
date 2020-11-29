@@ -1,6 +1,8 @@
 #! usr/bin/env python3
 # -*- Coding: UTF-8 -*-
 
+"""Define urls wiring templates to users app views"""
+
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 from . import views

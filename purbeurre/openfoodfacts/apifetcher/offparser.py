@@ -1,3 +1,5 @@
+#! usr/bin/env python3
+# -*- Coding: UTF-8 -*-
 
 """Module to get data from open food facts Api"""
 

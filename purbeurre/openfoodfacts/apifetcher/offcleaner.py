@@ -1,3 +1,6 @@
+#! usr/bin/env python3
+# -*- Coding: UTF-8 -*-
+
 """Module to clean and extract retrieved data"""
 
 from .offparser import ProductFetcher as pf

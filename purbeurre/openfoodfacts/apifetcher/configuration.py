@@ -1,3 +1,6 @@
+#! usr/bin/env python3
+# -*- Coding: UTF-8 -*-
+
 """Module containing needed cofiguration for getting data"""
 
 
@@ -21,7 +24,12 @@ class ApiOff:
     attributes = ["product_name", "nutrition_grades", "image_url",
                   "image_nutrition_url", "url", "code", "categories_hierarchy"]
     product_characteristics = [
-        "code", "product_name", "nutrition_grades", "url", "image_url", "image_nutrition_url"]
+        "code",
+        "product_name",
+        "nutrition_grades",
+        "url",
+        "image_url",
+        "image_nutrition_url"]
 
     category_size = 160
 

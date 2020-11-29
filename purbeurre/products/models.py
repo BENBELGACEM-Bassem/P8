@@ -1,7 +1,7 @@
 #! usr/bin/env python3
 # -*- Coding: UTF-8 -*-
 
-"""Module creating product and category data base tables,  based on django ORM"""
+"""Module creating product and category data base tables,based on django ORM"""
 
 from django.db import models
 from django.forms import ModelForm, TextInput
@@ -19,7 +19,6 @@ class Category(models.Model):
         max_length=255,
         unique=True,
         help_text='Category name')
-
 
     def __str__(self):
         return self.category_name
@@ -57,6 +56,7 @@ class Product(models.Model):
 
 
 class ProductForm(ModelForm):
+    """Define a form related to Product table"""
     class Meta:
         model = Product
         fields = ('product_name',)
@@ -64,4 +64,4 @@ class ProductForm(ModelForm):
             'class': 'form-control border border-warning',
             'placeholder': 'Trouvez un aliment', })}
 
-        labels = {'product_name': _(''),}
+        labels = {'product_name': _(''), }

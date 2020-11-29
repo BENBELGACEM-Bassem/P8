@@ -1,3 +1,6 @@
+#! usr/bin/env python3
+# -*- Coding: UTF-8 -*-
+
 """This module is responsible for building the user database"""
 
 from .offcleaner import ProductCleaner as pcl
