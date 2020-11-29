@@ -13,7 +13,6 @@ class Favorite(models.Model):
 
     class Meta:
         db_table = 'Favorite'
-        unique_together = ['substituted', 'substitute']
 
     substituted = models.ForeignKey(
         Product,

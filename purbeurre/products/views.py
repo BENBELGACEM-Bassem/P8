@@ -11,7 +11,6 @@ class ResultView(ListView):
 	template_name = 'products/results.html'
 	context_object_name = 'product_list'
 
-
 	def get_queryset(self):
 		# Retrieve product to be substituted
 		if Product.objects.filter(product_name__icontains=self.kwargs['product_name']).exists():

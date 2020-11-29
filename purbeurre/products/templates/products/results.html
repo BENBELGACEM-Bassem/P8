@@ -51,8 +51,8 @@
 	      					{% if user.is_authenticated %}
 								<form class="save" action="{% url 'favorites:save' substituted.product_name page_obj.number %}" method="POST">
 									{% csrf_token %}
-                            		<input type="hidden" name="substitute" value="{{product.id}}"/>
                             		<input type="hidden" name="substituted" value="{{substituted.id}}"/>
+                            		<input type="hidden" name="substitute" value="{{product.id}}"/>
                             		<input type="hidden" name="user" value="{{user.id}}"/>
 									{% if product in user_favorites %}
 	                                	<input type="submit" class="btn btn-outline-success mb-1" disabled=True value="Sauvegardé" />

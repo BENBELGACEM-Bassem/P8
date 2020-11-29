@@ -12,10 +12,10 @@ class FavoriteListView(ListView):
 	template_name = 'favorites/list.html'
 	context_object_name = 'favorites_list'
 	
-
 	def get_queryset(self):
 		# Retrieve favorites list
-		favorites = Favorite.objects.all()
+		current_user = self.request.user
+		favorites = Favorite.objects.filter(user=current_user.id)
 		if favorites.exists():
 			self.paginate_by = 6
 			return favorites
