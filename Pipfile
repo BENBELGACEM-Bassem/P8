@@ -14,6 +14,8 @@ flake8 = "*"
 pylint = "*"
 django-crispy-forms = "*"
 coverage = "*"
+django-on-heroku = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"

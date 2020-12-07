@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 
+import django_on_heroku
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('PURBEURRE_SECRET_KEY', 'dummy secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False if os.environ.get('ENV', 'development') == 'production' else True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapps.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -130,6 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Setting up a reference for a custom user model
 AUTH_USER_MODEL = 'users.User'
@@ -139,3 +142,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Maching crispy to bootstrap4
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# For deploiement purpose on heroku
+django_on_heroku.settings(locals())
