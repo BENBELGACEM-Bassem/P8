@@ -148,7 +148,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 django_on_heroku.settings(locals())
 
 
-
+# Get the relevant errors to propagate up through the Heroku logs.
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
