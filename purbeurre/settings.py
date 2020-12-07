@@ -26,8 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('PURBEURRE_SECRET_KEY', 'dummy secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False if os.environ.get('ENV', 'development') == 'production' else True
-DEBUG = True
+DEBUG = False if os.environ.get('ENV', 'development') == 'production' else True
+
 
 ALLOWED_HOSTS = ['https://bbgpurbeurre.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -146,3 +146,40 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # For deploiement purpose on heroku
 django_on_heroku.settings(locals())
+
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'mysite.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers':['file'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+        'MYAPP': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    }
+}
+
+DEBUG_PROPAGATE_EXCEPTIONS = True
