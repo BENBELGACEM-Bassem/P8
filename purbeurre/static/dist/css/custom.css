@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+.noresultview {
+	background-color:#DE9440;  //Caramel mou
+}
+
+.accounttview {
+	background-image: url("../assets/img/bg-account.jpg"); 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+
+.tagline {
+	background-color:rgb(248,248,255, 0.7);  //ghostwhite
+}
+
+.page {
+	width: 24em;
+	 }
+
+
+.picture {
+	width: 80%; 
+	height: 12em;
+
+	 }
+ 
+
+ .dot {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    right: -1rem;
+    top: -1rem;
+    line-height: 2rem;
+    border-radius: 50%;
+    text-transform: 
+}
+
+.link {
+	text-decoration-line: underline;
+	 }
+
+
+
+
