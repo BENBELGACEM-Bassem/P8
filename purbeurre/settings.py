@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('PURBEURRE_SECRET_KEY', 'dummy secret key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if os.environ.get('ENV', 'development') == 'production' else True
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['https://bbgpurbeurre.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
