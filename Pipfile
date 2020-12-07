@@ -12,6 +12,8 @@ autopep8 = "*"
 requests = "*"
 flake8 = "*"
 pylint = "*"
+django-crispy-forms = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.8"
