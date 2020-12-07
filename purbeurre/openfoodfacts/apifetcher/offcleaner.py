@@ -20,7 +20,7 @@ class ProductCleaner:
             page_number = 0
             # Loop through api until required number
             # of valid products per category is got
-            while len(parsed_data.get(category)) < api.category_size:
+            while len(parsed_data.get(category)) < api.minimum_category_size:
                 page_number += 1
                 parsed_data.get(category).extend(pf.get_data_about(
                     **api.product_choices_on(category, page_number)))

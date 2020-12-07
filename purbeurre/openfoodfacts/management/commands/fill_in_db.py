@@ -30,7 +30,7 @@ class Command(BaseCommand):
             if options['categories']:
                 api.category_list = options['categories']
             if options['size']:
-                api.category_size = options['size']
+                api.minimum_category_size = options['size']
             dbbuilder.build()
             self.stdout.write(self.style.SUCCESS(
                 'Data base successfully populated'))
@@ -38,3 +38,4 @@ class Command(BaseCommand):
             raise CommandError('Product table has to be created first')
         except Category.DoesNotExist:
             raise CommandError('Category table has to be created first')
+

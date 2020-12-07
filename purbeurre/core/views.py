@@ -1,3 +1,8 @@
+#! usr/bin/env python3
+# -*- Coding: UTF-8 -*-
+
+"""Define views managing serving home and legal notice pages"""
+
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView

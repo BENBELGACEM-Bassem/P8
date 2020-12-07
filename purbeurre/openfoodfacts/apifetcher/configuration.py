@@ -31,7 +31,7 @@ class ApiOff:
         "image_url",
         "image_nutrition_url"]
 
-    category_size = 160
+    minimum_category_size = 160
 
     @classmethod
     def product_choices_on(cls, wanted_category, page_number):
