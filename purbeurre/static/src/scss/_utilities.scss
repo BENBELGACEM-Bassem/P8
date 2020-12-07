@@ -1,0 +1,18 @@
+// Custom utilities for this theme
+
+.text-white-75 {
+    color: fade-out($white, 0.25);
+}
+
+
+p { 
+  font-family: $font-family-serif;
+}
+
+h { 
+  font-family: $font-family-serif;
+}
+
+a { 
+  font-family: $font-family-serif;
+}
