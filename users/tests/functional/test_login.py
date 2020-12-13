@@ -41,7 +41,7 @@ class MySeleniumTests(StaticLiveServerTestCase):
         username_input.send_keys('myuser@gmail.com', Keys.ENTER)
         time.sleep(1)
         password_input = self.selenium.find_element(By.ID, "id_password")
-        password_input.send_keys('connectme1234')
+        password_input.send_keys('connectme1234', Keys.ENTER)
         time.sleep(1)
         self.selenium.find_element_by_xpath(
             '//input[@value="Se connecter"]').click()
