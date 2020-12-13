@@ -16,6 +16,7 @@ django-crispy-forms = "*"
 coverage = "*"
 django-on-heroku = "*"
 gunicorn = "*"
+selenium = "*"
 
 [requires]
 python_version = "3.8"

@@ -25,7 +25,7 @@ python manage.py fill_in_db [How much data you want].
 By default, data will be loaded for 5 categories of products and 160 products per category.
 
 # Test the code
-
+Add chromedriver on your path to perform functional test (Use brew if you are on mac)
 Run the following command on the terminal, on project root directory:
 coverage run --source='.' manage.py test
 Then get a report by running:
