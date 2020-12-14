@@ -38,16 +38,16 @@ class MySeleniumTests(StaticLiveServerTestCase):
         self.selenium.get('%s%s' % (self.live_server_url, '/users/login'))
         time.sleep(3)
         username_input = self.selenium.find_element(By.ID, "id_username")
-        username_input.send_keys('myuser@gmail.com', Keys.ENTER)
+        username_input.send_keys('myuser@gmail.com')
         time.sleep(1)
         password_input = self.selenium.find_element(By.ID, "id_password")
-        password_input.send_keys('connectme1234', Keys.ENTER)
+        password_input.send_keys('connectme1234')
         time.sleep(1)
-        self.selenium.find_element_by_xpath(
-            '//input[@value="Se connecter"]').click()
+        self.selenium.find_element(
+            By.ID, "button-addon2").click()
         time.sleep(1)
         message = WebDriverWait(
             self.selenium, timeout=10).until(
             EC.presence_of_element_located(
-                (By.CLASS_NAME, "alert")))
+                (By.ID, "alert_message")))
         assert "Vous êtes désoramais connectés." in message.text
